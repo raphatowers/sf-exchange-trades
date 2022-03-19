@@ -4,15 +4,12 @@ public with sharing class ExchangeTradeService {
     }
 
     private static String API_ENDPOINT = 'http://data.fixer.io/api/latest?access_key={0}&base={1}';
-    private static String API_ACCESS_KEY = '';
     private static String REQUEST_METHOD_GET = 'GET';
 
     public Map<String, Decimal> getExchangeRates(String currencyCode) {
 
-        String endPoint = String.format(API_ENDPOINT, new List<String>{
-            API_ACCESS_KEY,
-            currencyCode
-        });
+        String apiAccessKey = ExchangeTradeSettings__c.getInstance().API_Access_Key__c;
+        String endPoint = String.format(API_ENDPOINT, new List<String>{ apiAccessKey, currencyCode });
 
         HttpRequest httpRequest = new HttpRequest();
 		httpRequest.setEndpoint(endPoint);
