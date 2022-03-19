@@ -1,6 +1,15 @@
-public with sharing class ExchangeTradeService {
-    public interface API {
+public with sharing class ExchangeTradeService implements IExchangeTradeService {
+    public interface IExchangeTradeService {
         Map<String, Decimal> getExchangeRates(String currencyCode);
+    }
+
+    private static IExchangeTradeService serviceInstance;
+    public static IExchangeTradeService getInstance() {
+        if (serviceInstance == null) {
+            serviceInstance = new ExchangeTradeService();
+        }
+
+        return serviceInstance;
     }
 
     private static String API_ENDPOINT = 'http://data.fixer.io/api/latest?access_key={0}&base={1}';
