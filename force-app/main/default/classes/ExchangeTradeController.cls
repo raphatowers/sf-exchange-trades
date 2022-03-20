@@ -1,6 +1,6 @@
 public class ExchangeTradeController {
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<Trade> getBookedTrades(){
         try {
             List<Trade__c> trades = ExchangeTradeSelector.getInstance().selectAll();
@@ -16,7 +16,7 @@ public class ExchangeTradeController {
         }
     }
     
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<ExchangeRate> getExchangeRates(String currencyCode){
         try {
             Map<String, Decimal> rateValueByCode = ExchangeTradeService.getInstance().getExchangeRates(currencyCode);
