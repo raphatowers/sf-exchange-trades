@@ -1,6 +1,14 @@
 <template>
     <lightning-card title="Booked Trades">
-        <lightning-button label="New Trade" slot="actions"></lightning-button>
+        <lightning-button
+            label="New Trade"
+            slot="actions"
+            onclick={openModal}
+        ></lightning-button>
+        <c-new-trade-modal
+            if:true={isModalOpen}
+            onclose={closeModal}
+        ></c-new-trade-modal>
         <lightning-datatable
                 key-field="id"
                 data={data}

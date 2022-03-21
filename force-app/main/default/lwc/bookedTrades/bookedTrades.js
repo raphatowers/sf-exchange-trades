@@ -13,6 +13,7 @@ const columns = [
 export default class BookedTrades extends LightningElement {
     data = [];
     columns = columns;
+    isModalOpen = false;
 
     @wire(getBookedTrades)
     wiredBookedTrades({ error, data }) {
@@ -21,5 +22,13 @@ export default class BookedTrades extends LightningElement {
         } else if (error) {
 
         }
+    }
+
+    openModal() {
+        this.isModalOpen = true;
+    }
+
+    closeModal() {
+        this.isModalOpen = false;
     }
 }
