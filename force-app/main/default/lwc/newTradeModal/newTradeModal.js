@@ -1,10 +1,13 @@
 import { LightningElement } from 'lwc';
-
+import { Close } from './events.js';
 export default class NewTradeModal extends LightningElement {
-    closeModal() {
-        
-    }
-    submit() {
-        
+    
+
+	handleClose() {
+		this.dispatchEvent(new Close());
+	}
+
+    handleCreate() {
+
     }
 }
