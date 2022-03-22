@@ -37,6 +37,46 @@ public with sharing class ExchangeTradeService implements IExchangeTradeService 
         }
     }
 
+    public void createChatterPosts(List<Trade__c> trades) {
+        List<GroupMember> groupMembers = GroupSelector.getInstance().selectMembersByGroupTypesAndNames(
+            new List<String> {'Queue'},
+            new List<String> {'Trade reviewers'}
+        );
+
+        if (!groupMembers.isEmpty()) {
+            String t = 'Sell Currency: {0}\nSell Amount: {1}\nBuy Currency: {2}\nBuy Amount: {3}\nRate: {4}\nBooked Date: {5}\nLink to the trade: {6}/{7}';
+            String baseUrl = URL.getSalesforceBaseUrl().toExternalForm();
+            List<FeedItem> posts = new List<FeedItem>();
+
+            for (Trade__c trade : trades) {
+                String body = formatChatterBodyPost(trade, t, baseUrl);
+
+                for(GroupMember groupMember : groupMembers) {
+                    posts.add(new FeedItem(
+                        ParentId = groupMember.UserOrGroupId,
+                        Title = 'New Trade has been created',
+                        Body = 'Trade body'
+                    ));
+                }
+            }
+
+            insert posts;
+        }
+    }
+
+    private String formatChatterBodyPost(Trade__c trade, String template, String baseUrl) {
+        return String.format(template, new List<String> {
+            trade.Sell_Currency__c,
+            String.valueOf(trade.Sell_Amount__c),
+            trade.Buy_Currency__c,
+            String.valueOf(trade.Buy_Amount__c),
+            String.valueOf(trade.Rate__c),
+            trade.Date_Booked__c.format(),
+            baseUrl,
+            trade.Id
+        });
+    }
+
     public class ExchangeTradeException extends Exception {}
 
     private class ExchangeRates {
