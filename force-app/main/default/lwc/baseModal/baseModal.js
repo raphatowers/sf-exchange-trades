@@ -17,8 +17,8 @@ export default class BaseModal extends LightningElement {
          this.dispatchEvent(new Close());
      }
 
-     handleSubmit() {
+     async handleSubmit() {
+        await this.submitCallback();
         this.dispatchEvent(new Submit());
-        this.submitCallback();
-     }
+    }
 }
