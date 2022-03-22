@@ -58,12 +58,15 @@ public class ExchangeTradeController {
 
     public class ExchangeRate {
         @AuraEnabled
-        public String currencyCode;
+        public String label;
+        @AuraEnabled
+        public String value;
         @AuraEnabled
         public Decimal rate;
 
         public ExchangeRate (String currencyCode, Decimal rate) {
-            this.currencyCode = currencyCode;
+            this.label = currencyCode;
+            this.value = currencyCode;
             this.rate = rate;
         }
     }
