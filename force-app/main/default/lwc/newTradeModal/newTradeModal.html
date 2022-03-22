@@ -3,6 +3,34 @@
         title="New Trade"
         onclose={handleClose}
     >
-        <h2>Content is here!</h2>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-combobox
+                    name="sellCurrency"
+                    label="Sell Currency"
+                    value={sellCurrency}
+                    placeholder="Select Currency"
+                    options={supportedCurrencies}
+                    onchange={handleSellCurrencyChange}
+                ></lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_2-of-3">
+                <lightning-icon icon-name="utility:right" alternative-text="Right">
+                </lightning-icon>
+                <span>{rate}</span>
+                <lightning-icon icon-name="utility:right" alternative-text="Right">
+                </lightning-icon>
+            </div>
+            <div class="slds-col slds-size_3-of-3">
+                <lightning-combobox
+                    name="buyCurrency"
+                    label="Buy Currency"
+                    value={buyCurrency}
+                    placeholder="Select Currency"
+                    options={buyCurrencies}
+                    onchange={handleBuyCurrencyChange}
+                ></lightning-combobox>
+            </div>
+        </div>
     </c-base-modal>
 </template>
