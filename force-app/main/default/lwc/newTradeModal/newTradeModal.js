@@ -1,6 +1,7 @@
 import { LightningElement, track } from 'lwc';
 import { Close } from './events.js';
 import getExchangeRates from '@salesforce/apex/ExchangeTradeController.getExchangeRates';
+import createNewTrade from '@salesforce/apex/ExchangeTradeController.createNewTrade';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class NewTradeModal extends LightningElement {
@@ -60,5 +61,17 @@ export default class NewTradeModal extends LightningElement {
         } else {
             this.buyAmount = null;
         }
+    }
+
+    handleCreate = () => {
+        createNewTrade({
+            newTrade: {
+                sellCurrency: this.sellCurrency,
+                sellAmount: this.sellAmount,
+                buyCurrency: this.buyCurrency,
+                buyAmount: this.buyAmount,
+                rate: this.rate,
+            }
+        });
     }
 }
