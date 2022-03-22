@@ -1,5 +1,5 @@
 import { LightningElement, track } from 'lwc';
-import { Close } from './events.js';
+import { Close, Submit } from './events.js';
 import getExchangeRates from '@salesforce/apex/ExchangeTradeController.getExchangeRates';
 import createNewTrade from '@salesforce/apex/ExchangeTradeController.createNewTrade';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -20,6 +20,11 @@ export default class NewTradeModal extends LightningElement {
 	handleClose() {
 		this.dispatchEvent(new Close());
 	}
+
+    handleSubmit() {
+		this.dispatchEvent(new Submit());
+        this.handleClose();
+    }
 
     handleSellCurrencyChange(event) {
         this.sellCurrency = event.target.value;
