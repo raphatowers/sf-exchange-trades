@@ -32,19 +32,39 @@ public class ExchangeTradeController {
         }
     }
 
+    @AuraEnabled
+    public static void createNewTrade(Trade newTrade){
+        try {
+            if (newTrade != null) {
+                insert new Trade__c (
+                    Sell_Currency__c = newTrade.sellCurrency,
+                    Sell_Amount__c = newTrade.sellAmount,
+                    Buy_Currency__c = newTrade.buyCurrency,
+                    Buy_Amount__c = newTrade.buyAmount,
+                    Rate__c = newTrade.rate,
+                    Date_Booked__c = Datetime.now()
+                );
+            }
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
     public class Trade {
         @AuraEnabled
-        public String sellCurrency;
+        public String sellCurrency { get; set; }
         @AuraEnabled
-        public Decimal sellAmount;
+        public Decimal sellAmount { get; set; }
         @AuraEnabled
-        public String buyCurrency;
+        public String buyCurrency { get; set; }
         @AuraEnabled
-        public Decimal buyAmount;
+        public Decimal buyAmount { get; set; }
         @AuraEnabled
-        public Decimal rate;
+        public Decimal rate { get; set; }
         @AuraEnabled
-        public Datetime dateBooked;
+        public Datetime dateBooked { get; set; }
+
+        public Trade() {}
 
         public Trade(String sellCurrency, Decimal sellAmount, String buyCurrency, Decimal buyAmount, Decimal rate, Datetime dateBooked) {
             this.sellCurrency = sellCurrency;
