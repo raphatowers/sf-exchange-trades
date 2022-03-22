@@ -1,6 +1,7 @@
 public with sharing class ExchangeTradeService implements IExchangeTradeService {
     public interface IExchangeTradeService {
         Map<String, Decimal> getExchangeRates(String currencyCode);
+        void createChatterPosts(List<Trade__c> trades);
     }
 
     private static IExchangeTradeService serviceInstance;
