@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { Close } from './events.js';
+import { Close, Submit } from './events.js';
 
 export default class BaseModal extends LightningElement {
     /**
@@ -7,25 +7,18 @@ export default class BaseModal extends LightningElement {
      * @type {String}
      */
      @api title;
-
      /**
-      * @fires module:BaseModal.event:close
-      */
-     @api
-     close() {
-         /**
-          * Close event.
-          * @event module:BaseModal.event:close
-          */
-         this.dispatchEvent(new Close());
-     }
+     * Callback function fired by the submit button
+     * @type {function}
+     */
+     @api submitCallback
 
      handleCloseClick() {
          this.dispatchEvent(new Close());
-         this.close();
      }
 
      handleSubmit() {
-
+        this.dispatchEvent(new Submit());
+        this.submitCallback();
      }
 }

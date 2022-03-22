@@ -7,3 +7,12 @@ export class Close extends CustomEvent {
         return 'close';
     }
 }
+export class Submit extends CustomEvent {
+    constructor() {
+        super(Submit.type);
+    }
+
+    static get type() {
+        return 'submit';
+    }
+}
