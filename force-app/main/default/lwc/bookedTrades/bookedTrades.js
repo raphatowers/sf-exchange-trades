@@ -1,4 +1,5 @@
 import { LightningElement, wire } from 'lwc';
+import { refreshApex } from '@salesforce/apex';
 import getBookedTrades from '@salesforce/apex/ExchangeTradeController.getBookedTrades';
 
 const columns = [
@@ -16,12 +17,11 @@ export default class BookedTrades extends LightningElement {
     isModalOpen = false;
 
     @wire(getBookedTrades)
-    wiredBookedTrades({ error, data }) {
-        if (data) {
-            this.data = data;
-        } else if (error) {
+    wiredTrades;
 
-        }
+    refreshTrades() {
+        this.closeModal();
+        refreshApex(this.wiredTrades);
     }
 
     openModal() {

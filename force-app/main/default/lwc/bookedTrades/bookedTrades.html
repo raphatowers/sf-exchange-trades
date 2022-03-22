@@ -8,10 +8,11 @@
         <c-new-trade-modal
             if:true={isModalOpen}
             onclose={closeModal}
+            onsubmit={refreshTrades}
         ></c-new-trade-modal>
         <lightning-datatable
                 key-field="id"
-                data={data}
+                data={wiredTrades.data}
                 columns={columns}>
         </lightning-datatable>
     </lightning-card>
