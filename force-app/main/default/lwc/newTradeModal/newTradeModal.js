@@ -13,6 +13,8 @@ export default class NewTradeModal extends LightningElement {
     sellCurrency = '';
     buyCurrency = '';
     rate;
+    sellAmount;
+    buyAmount;
 
 	handleClose() {
 		this.dispatchEvent(new Close());
@@ -44,5 +46,19 @@ export default class NewTradeModal extends LightningElement {
     handleBuyCurrencyChange(event) {
         this.buyCurrency = event.target.value;
         this.rate = this.buyCurrencies.find(currency => currency.value == this.buyCurrency).rate;
+        this.updateBuyAmount();
+    }
+
+    handleSellAmountChange(event) {
+        this.sellAmount = event.target.value;
+        this.updateBuyAmount();
+    }
+
+    updateBuyAmount() {
+        if (this.sellAmount && this.rate) {
+            this.buyAmount = this.sellAmount * this.rate;
+        } else {
+            this.buyAmount = null;
+        }
     }
 }
