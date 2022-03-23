@@ -13,7 +13,7 @@ public class GroupSelector implements IGroupSelector {
     }
 
     public List<GroupMember> selectMembersByGroupTypesAndNames(List<String> types, List<String> names) {
-        List<Group> groups = [SELECT Id FROM Group WHERE type = :types and Name = :names];
+        List<Group> groups = [SELECT Id FROM Group WHERE Type = :types and Name = :names];
         return [SELECT UserOrGroupId FROM GroupMember WHERE GroupId = :groups];
     }
 }

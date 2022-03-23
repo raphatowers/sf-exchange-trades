@@ -1,4 +1,4 @@
-@IsTest
+@IsTest(seeAllData=false)
 private class ExchangeTradeSelectorTest {
     @IsTest
     static void selectAll_severalTradesCreated_allRetrievedAndProperlySorted() {
