@@ -16,8 +16,12 @@ public with sharing class ExchangeTradeService implements IExchangeTradeService 
     private static String API_ENDPOINT = 'http://data.fixer.io/api/latest?access_key={0}&base={1}';
     private static String REQUEST_METHOD_GET = 'GET';
 
-    public Map<String, Decimal> getExchangeRates(String currencyCode) {
+    private static String GROUP_TYPE_QUEUE = 'Queue';
+    private static String GROUP_CHATTER_NAME = 'Trade reviewers';
+    private static String CHATTER_TYPE_LINK = 'LinkPost';
+    private static String SLASH = '/';
 
+    public Map<String, Decimal> getExchangeRates(String currencyCode) {
         String apiAccessKey = ExchangeTradeSettings__c.getInstance().API_Access_Key__c;
         String endPoint = String.format(API_ENDPOINT, new List<String>{ apiAccessKey, currencyCode });
 
@@ -40,25 +44,24 @@ public with sharing class ExchangeTradeService implements IExchangeTradeService 
 
     public void createChatterPosts(List<Trade__c> trades) {
         List<GroupMember> groupMembers = GroupSelector.getInstance().selectMembersByGroupTypesAndNames(
-            new List<String> {'Queue'},
-            new List<String> {'Trade reviewers'}
+            new List<String> { GROUP_TYPE_QUEUE },
+            new List<String> { GROUP_CHATTER_NAME }
         );
 
         if (!groupMembers.isEmpty()) {
-            String t = 'A new trade has been created:\nSell Currency: {0}\nSell Amount: {1}\nBuy Currency: {2}\nBuy Amount: {3}\nRate: {4}\nBooked Date: {5}';
             String baseUrl = URL.getSalesforceBaseUrl().toExternalForm();
             List<FeedItem> posts = new List<FeedItem>();
 
             for (Trade__c trade : trades) {
-                String body = formatChatterBodyPost(trade, t);
+                String body = formatChatterBodyPost(trade);
 
                 for(GroupMember groupMember : groupMembers) {
                     posts.add(new FeedItem(
                         ParentId = groupMember.UserOrGroupId,
                         Body = body,
-                        Type = 'LinkPost',
-                        Title = 'Link to the trade',
-                        LinkUrl = baseUrl + '/' + trade.Id
+                        Type = CHATTER_TYPE_LINK,
+                        Title = Label.NewTradeChatterPostLinkTitle,
+                        LinkUrl = baseUrl + SLASH + trade.Id
                     ));
                 }
             }
@@ -67,8 +70,8 @@ public with sharing class ExchangeTradeService implements IExchangeTradeService 
         }
     }
 
-    private String formatChatterBodyPost(Trade__c trade, String template) {
-        return String.format(template, new List<String> {
+    private String formatChatterBodyPost(Trade__c trade) {
+        return String.format(Label.NewTradeChatterPostBody, new List<String> {
             trade.Sell_Currency__c,
             String.valueOf(trade.Sell_Amount__c),
             trade.Buy_Currency__c,
