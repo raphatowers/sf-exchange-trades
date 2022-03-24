@@ -83,12 +83,14 @@ public with sharing class ExchangeTradeService implements IExchangeTradeService 
 
     public class ExchangeTradeException extends Exception {}
 
+    @TestVisible
     private class ExchangeRates {
-        Boolean success;
+        public Boolean success;
         public Map<String, Decimal> rates;
         public RequestError error;
     }
 
+    @TestVisible
     private class RequestError {
         public String type;
     }
