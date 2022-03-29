@@ -82,6 +82,23 @@ private class ExchangeTradeControllerTest {
         }
     }
 
+    @isTest
+    static void getExchangeRates_error_exceptionThrownProperlyHandled() {
+        // Given
+        String error = 'Something went wrong!';
+        ExchangeTradeServiceMock serviceMock = new ExchangeTradeServiceMock(error);
+        new ExchangeTradeService().setMock(serviceMock);
+
+        // When
+        try {
+            ExchangeTradeController.getExchangeRates('Any currency');
+            System.assert(false, 'Exception expected');
+        } catch (AuraHandledException e) {
+            // Then
+            System.assertEquals(error, e.getMessage());
+        }
+    }
+
     private static void assertTrade(Trade__c expected, ExchangeTradeController.Trade actual) {
         System.assertEquals(expected.Sell_Currency__c, actual.sellCurrency);
         System.assertEquals(expected.Sell_Amount__c, actual.sellAmount);
@@ -114,14 +131,24 @@ private class ExchangeTradeControllerTest {
 
     private class ExchangeTradeServiceMock implements ExchangeTradeService.IExchangeTradeService {
         public Map<String, Decimal> rateValueByCode;
+        public String error;
 
         public ExchangeTradeServiceMock(Map<String, Decimal> rateValueByCode) {
             this.rateValueByCode = rateValueByCode;
         }
 
+        public ExchangeTradeServiceMock(String error) {
+            this.error = error;
+        }
+
         public Map<String, Decimal> getExchangeRates(String currencyCode) {
+            if (String.isNotBlank(error)) {
+                throw new MockException(error);
+            }
+
             return this.rateValueByCode;
         }
+
         public void createChatterPosts(List<Trade__c> trades) {
 
         }
