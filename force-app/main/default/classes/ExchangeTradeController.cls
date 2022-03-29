@@ -12,10 +12,10 @@ public class ExchangeTradeController {
 
             return bookedTrades;
         } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+            throw getAuraException(e.getMessage());
         }
     }
-    
+
     @AuraEnabled(cacheable=true)
     public static List<ExchangeRate> getExchangeRates(String currencyCode){
         try {
@@ -28,7 +28,7 @@ public class ExchangeTradeController {
 
             return exchangeRates;
         } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+            throw getAuraException(e.getMessage());
         }
     }
 
@@ -46,8 +46,14 @@ public class ExchangeTradeController {
                 );
             }
         } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+            throw getAuraException(e.getMessage());
         }
+    }
+
+    private static AuraHandledException getAuraException(String message) {
+        AuraHandledException auraEx = new AuraHandledException(message);
+        auraEx.setMessage(message);
+        return auraEx;
     }
 
     public class Trade {
