@@ -13,6 +13,11 @@ public with sharing class ExchangeTradeService implements IExchangeTradeService 
         return serviceInstance;
     }
 
+    @TestVisible
+    private void setMock(IExchangeTradeService serviceMock) {
+        serviceInstance = serviceMock;
+    }
+
     private static String API_ENDPOINT = 'http://data.fixer.io/api/latest?access_key={0}&base={1}';
     private static String REQUEST_METHOD_GET = 'GET';
 
@@ -70,6 +75,7 @@ public with sharing class ExchangeTradeService implements IExchangeTradeService 
         }
     }
 
+    @TestVisible
     private String formatChatterBodyPost(Trade__c trade) {
         return String.format(Label.NewTradeChatterPostBody, new List<String> {
             trade.Sell_Currency__c,
