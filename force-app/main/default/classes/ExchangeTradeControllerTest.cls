@@ -60,12 +60,40 @@ private class ExchangeTradeControllerTest {
         }
     }
 
+    @isTest
+    static void getExchangeRates_currencyRatesAvailable_ratesAreParsedAndReturned() {
+        // Given
+        String currencyCode = 'EUR';
+        Map<String, Decimal> rateValueByCode = new Map<String, Decimal> {
+            'GBP' => 1.5,
+            'USD' => 0.7
+        };
+        ExchangeTradeServiceMock serviceMock = new ExchangeTradeServiceMock(rateValueByCode);
+        new ExchangeTradeService().setMock(serviceMock);
+
+        // When
+        List<ExchangeTradeController.ExchangeRate> actualRates = ExchangeTradeController.getExchangeRates(currencyCode);
+
+        // Then
+        Integer count = 0;
+        for (String expectedCurrencyCode : rateValueByCode.keySet()) {
+            assertExchangeRate(expectedCurrencyCode, rateValueByCode.get(expectedCurrencyCode), actualRates[count]);
+            count++;
+        }
+    }
+
     private static void assertTrade(Trade__c expected, ExchangeTradeController.Trade actual) {
         System.assertEquals(expected.Sell_Currency__c, actual.sellCurrency);
         System.assertEquals(expected.Sell_Amount__c, actual.sellAmount);
         System.assertEquals(expected.Buy_Currency__c, actual.buyCurrency);
         System.assertEquals(expected.Buy_Amount__c, actual.buyAmount);
         System.assertEquals(expected.Date_Booked__c, actual.dateBooked);
+    }
+
+    private static void assertExchangeRate(String expectedCurrency, Decimal expectedRate, ExchangeTradeController.ExchangeRate actual) {
+        System.assertEquals(expectedCurrency, actual.label);
+        System.assertEquals(expectedCurrency, actual.value);
+        System.assertEquals(expectedRate, actual.rate);
     }
 
     private class ExchangeTradeSelectorMock implements ExchangeTradeSelector.IExchangeTradeSelector {
@@ -84,6 +112,20 @@ private class ExchangeTradeControllerTest {
         }
     }
 
-    public class MockException extends Exception {}
+    private class ExchangeTradeServiceMock implements ExchangeTradeService.IExchangeTradeService {
+        public Map<String, Decimal> rateValueByCode;
 
+        public ExchangeTradeServiceMock(Map<String, Decimal> rateValueByCode) {
+            this.rateValueByCode = rateValueByCode;
+        }
+
+        public Map<String, Decimal> getExchangeRates(String currencyCode) {
+            return this.rateValueByCode;
+        }
+        public void createChatterPosts(List<Trade__c> trades) {
+
+        }
+    }
+
+    public class MockException extends Exception {}
 }
