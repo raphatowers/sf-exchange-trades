@@ -99,12 +99,52 @@ private class ExchangeTradeControllerTest {
         }
     }
 
+    @isTest
+    static void createNewTrade_null_recordIsNotCreated() {
+        // Given
+        ExchangeTradeController.Trade newTrade;
+
+        // When
+        ExchangeTradeController.createNewTrade(newTrade);
+
+        // Then
+        List<Trade__c> trades = [SELECT Id FROM Trade__c];
+        System.assertEquals(true, trades.isEmpty());
+    }
+
+    @isTest
+    static void createNewTrade_newTrade_recordIsCorrectlyCreated() {
+        // Given
+        ExchangeTradeController.Trade newTrade = new ExchangeTradeController.Trade(
+            'EUR',
+            100,
+            'USD',
+            110,
+            1.1,
+            Datetime.newInstance(2022, 8, 16, 3, 33, 38)
+        );
+
+        // When
+        ExchangeTradeController.createNewTrade(newTrade);
+
+        // Then
+        List<Trade__c> trades = ExchangeTradeSelector.getInstance().selectAll();
+        System.assertEquals(false, trades.isEmpty());
+        assertTrade(trades[0], newTrade, false);
+    }
+
     private static void assertTrade(Trade__c expected, ExchangeTradeController.Trade actual) {
+        assertTrade(expected, actual, true);
+    }
+
+    private static void assertTrade(Trade__c expected, ExchangeTradeController.Trade actual, Boolean checkDate) {
         System.assertEquals(expected.Sell_Currency__c, actual.sellCurrency);
         System.assertEquals(expected.Sell_Amount__c, actual.sellAmount);
         System.assertEquals(expected.Buy_Currency__c, actual.buyCurrency);
         System.assertEquals(expected.Buy_Amount__c, actual.buyAmount);
-        System.assertEquals(expected.Date_Booked__c, actual.dateBooked);
+        if (checkDate) {
+            System.assertEquals(expected.Date_Booked__c, actual.dateBooked);
+        }
     }
 
     private static void assertExchangeRate(String expectedCurrency, Decimal expectedRate, ExchangeTradeController.ExchangeRate actual) {
