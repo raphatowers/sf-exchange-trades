@@ -42,6 +42,24 @@ private class ExchangeTradeControllerTest {
         assertTrade(trades[0], actualTrades[1]);
     }
 
+    @isTest
+    static void getBookedTrades_error_exceptionThrownProperlyHandled() {
+        // Given
+        String error = 'Something went wrong!';
+        ExchangeTradeSelectorMock mock = new ExchangeTradeSelectorMock(error);
+        ExchangeTradeSelector selector = new ExchangeTradeSelector();
+        selector.setMock(mock);
+
+        // When
+        try {
+            ExchangeTradeController.getBookedTrades();
+            System.assert(false, 'Exception expected');
+        } catch (AuraHandledException e) {
+            // Then
+            System.assertEquals(error, e.getMessage());
+        }
+    }
+
     private static void assertTrade(Trade__c expected, ExchangeTradeController.Trade actual) {
         System.assertEquals(expected.Sell_Currency__c, actual.sellCurrency);
         System.assertEquals(expected.Sell_Amount__c, actual.sellAmount);
@@ -49,4 +67,23 @@ private class ExchangeTradeControllerTest {
         System.assertEquals(expected.Buy_Amount__c, actual.buyAmount);
         System.assertEquals(expected.Date_Booked__c, actual.dateBooked);
     }
+
+    private class ExchangeTradeSelectorMock implements ExchangeTradeSelector.IExchangeTradeSelector {
+        public String error;
+
+        public ExchangeTradeSelectorMock(String error) {
+            this.error = error;
+        }
+
+        public List<Trade__c> selectAll() {
+            if (String.isNotBlank(error)) {
+                throw new MockException(error);
+            }
+
+            return new List<Trade__c>();
+        }
+    }
+
+    public class MockException extends Exception {}
+
 }
