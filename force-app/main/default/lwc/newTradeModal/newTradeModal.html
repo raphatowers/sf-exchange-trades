@@ -5,7 +5,7 @@
         submit-callback={handleCreate}
         onsubmit={handleSubmit}
     >
-        <div class="slds-grid slds-wrap">
+        <div class="slds-grid slds-wrap slds-gutters">
             <div class="slds-col slds-size_1-of-3">
                 <lightning-combobox
                     name="sellCurrency"
@@ -16,14 +16,19 @@
                     onchange={handleSellCurrencyChange}
                 ></lightning-combobox>
             </div>
-            <div class="slds-col slds-size_2-of-3">
-                <lightning-icon icon-name="utility:right" alternative-text="Right">
-                </lightning-icon>
-                <span>{rate}</span>
-                <lightning-icon icon-name="utility:right" alternative-text="Right">
-                </lightning-icon>
+            <div class="slds-col slds-size_1-of-3 slds-align_absolute-center">
+                <div class="slds-form-element">
+                    <span class="slds-form-element__label">Rate</span>
+                    <div class="slds-form-element__control">
+                        <lightning-icon icon-name="utility:right" alternative-text="Right">
+                        </lightning-icon>
+                        <span>{rate}</span>
+                        <lightning-icon icon-name="utility:right" alternative-text="Right">
+                        </lightning-icon>
+                    </div>
+                </div>
             </div>
-            <div class="slds-col slds-size_3-of-3">
+            <div class="slds-col slds-size_1-of-3">
                 <lightning-combobox
                     name="buyCurrency"
                     label="Buy Currency"
@@ -36,10 +41,7 @@
             <div class="slds-col slds-size_1-of-3">
                 <lightning-input type="number" label="Sell Amount" step=".01" value={sellAmount} onkeyup={handleSellAmountChange}></lightning-input>
             </div>
-            <div class="slds-col slds-size_2-of-3">
-                
-            </div>
-            <div class="slds-col slds-size_3-of-3">
+            <div class="slds-col slds-size_1-of-3 slds-col_bump-left">
                 <lightning-input type="number" label="Buy Amount" step=".01" value={buyAmount} disabled></lightning-input>
             </div>
         </div>
