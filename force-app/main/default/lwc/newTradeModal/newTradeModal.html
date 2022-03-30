@@ -1,6 +1,7 @@
 <template>
     <c-base-modal
-        title="New Trade"
+        title={labels.newTrade}
+        submit-title={labels.create}
         onclose={handleClose}
         submit-callback={handleCreate}
         onsubmit={handleSubmit}
@@ -9,16 +10,16 @@
             <div class="slds-col slds-size_1-of-3">
                 <lightning-combobox
                     name="sellCurrency"
-                    label="Sell Currency"
+                    label={labels.sellCurrency}
                     value={sellCurrency}
-                    placeholder="Select Currency"
+                    placeholder={labels.selectCurrency}
                     options={supportedCurrencies}
                     onchange={handleSellCurrencyChange}
                 ></lightning-combobox>
             </div>
             <div class="slds-col slds-size_1-of-3 slds-align_absolute-center">
                 <div class="slds-form-element">
-                    <span class="slds-form-element__label">Rate</span>
+                    <span class="slds-form-element__label">{labels.rate}</span>
                     <div class="slds-form-element__control">
                         <lightning-icon icon-name="utility:right" alternative-text="Right">
                         </lightning-icon>
@@ -31,18 +32,18 @@
             <div class="slds-col slds-size_1-of-3">
                 <lightning-combobox
                     name="buyCurrency"
-                    label="Buy Currency"
+                    label={labels.buyCurrency}
                     value={buyCurrency}
-                    placeholder="Select Currency"
+                    placeholder={labels.selectCurrency}
                     options={buyCurrencies}
                     onchange={handleBuyCurrencyChange}
                 ></lightning-combobox>
             </div>
             <div class="slds-col slds-size_1-of-3">
-                <lightning-input type="number" label="Sell Amount" step=".01" value={sellAmount} onkeyup={handleSellAmountChange}></lightning-input>
+                <lightning-input type="number" label={labels.sellAmount} step=".01" value={sellAmount} onkeyup={handleSellAmountChange}></lightning-input>
             </div>
             <div class="slds-col slds-size_1-of-3 slds-col_bump-left">
-                <lightning-input type="number" label="Buy Amount" step=".01" value={buyAmount} disabled></lightning-input>
+                <lightning-input type="number" label={labels.buyAmount} step=".01" value={buyAmount} disabled></lightning-input>
             </div>
         </div>
     </c-base-modal>

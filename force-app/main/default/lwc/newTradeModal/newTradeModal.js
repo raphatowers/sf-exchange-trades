@@ -3,6 +3,7 @@ import { Close, Submit } from './events.js';
 import getExchangeRates from '@salesforce/apex/ExchangeTradeController.getExchangeRates';
 import createNewTrade from '@salesforce/apex/ExchangeTradeController.createNewTrade';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { LABELS } from './labels';
 
 export default class NewTradeModal extends LightningElement {
     supportedCurrencies = [
@@ -84,4 +85,8 @@ export default class NewTradeModal extends LightningElement {
             }
         });
     }
+
+	get labels() {
+		return LABELS;
+	}
 }
