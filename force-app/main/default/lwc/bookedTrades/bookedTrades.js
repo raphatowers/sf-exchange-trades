@@ -1,14 +1,15 @@
 import { LightningElement, wire } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 import getBookedTrades from '@salesforce/apex/ExchangeTradeController.getBookedTrades';
+import { LABELS } from './labels';
 
 const columns = [
-    { label: 'Sell CCY', fieldName: 'sellCurrency' },
-    { label: 'Sell Amount', fieldName: 'sellAmount', type: 'number' },
-    { label: 'Buy CCY', fieldName: 'buyCurrency' },
-    { label: 'Buy Amount', fieldName: 'buyAmount', type: 'number' },
-    { label: 'Rate', fieldName: 'rate', type: 'number' },
-    { label: 'Date Booked', fieldName: 'dateBooked', type: 'date' },
+    { label: LABELS.sellCurrency, fieldName: 'sellCurrency' },
+    { label: LABELS.sellAmount, fieldName: 'sellAmount', type: 'number' },
+    { label: LABELS.buyCurrency, fieldName: 'buyCurrency' },
+    { label: LABELS.buyAmount, fieldName: 'buyAmount', type: 'number' },
+    { label: LABELS.rate, fieldName: 'rate', type: 'number' },
+    { label: LABELS.dateBooked, fieldName: 'dateBooked', type: 'date' },
 ];
 
 export default class BookedTrades extends LightningElement {
@@ -31,4 +32,8 @@ export default class BookedTrades extends LightningElement {
     closeModal() {
         this.isModalOpen = false;
     }
+
+	get labels() {
+		return LABELS;
+	}
 }

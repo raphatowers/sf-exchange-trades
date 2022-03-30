@@ -84,4 +84,18 @@
 		<shortDescription>SelectCurrency</shortDescription>
 		<value>Select Currency</value>
 	</labels>
+	<labels>
+		<fullName>BookedTrades</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>BookedTrades</shortDescription>
+		<value>Booked Trades</value>
+	</labels>
+	<labels>
+		<fullName>DateBooked</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>DateBooked</shortDescription>
+		<value>Date Booked</value>
+	</labels>
 </CustomLabels>
