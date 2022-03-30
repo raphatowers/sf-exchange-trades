@@ -15,6 +15,7 @@
                     placeholder={labels.selectCurrency}
                     options={supportedCurrencies}
                     onchange={handleSellCurrencyChange}
+                    required
                 ></lightning-combobox>
             </div>
             <div class="slds-col slds-size_1-of-3 slds-align_absolute-center">
@@ -37,10 +38,11 @@
                     placeholder={labels.selectCurrency}
                     options={buyCurrencies}
                     onchange={handleBuyCurrencyChange}
+                    required
                 ></lightning-combobox>
             </div>
             <div class="slds-col slds-size_1-of-3">
-                <lightning-input type="number" label={labels.sellAmount} step=".01" value={sellAmount} onkeyup={handleSellAmountChange}></lightning-input>
+                <lightning-input type="number" label={labels.sellAmount} step=".01" value={sellAmount} onkeyup={handleSellAmountChange} required></lightning-input>
             </div>
             <div class="slds-col slds-size_1-of-3 slds-col_bump-left">
                 <lightning-input type="number" label={labels.buyAmount} step=".01" value={buyAmount} disabled></lightning-input>
