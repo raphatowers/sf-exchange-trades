@@ -13,7 +13,7 @@ export default class NewTradeModal extends LightningElement {
     buyCurrencies = [];
     sellCurrency = '';
     buyCurrency = '';
-    rate;
+    rate = '-';
     sellAmount;
     buyAmount;
 
@@ -39,6 +39,11 @@ export default class NewTradeModal extends LightningElement {
             this.buyCurrencies = result;
         })
         .catch((error) => {
+            this.rate = '-';
+            this.buyCurrency = '';
+            this.buyCurrencies = [];
+            this.buyAmount = null;
+
             this.dispatchEvent(
 				new ShowToastEvent({
 					message: error.body.message,
