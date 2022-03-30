@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { Close, Submit } from './events.js';
+import { LABELS } from './labels';
 
 export default class BaseModal extends LightningElement {
     /**
@@ -7,6 +8,13 @@ export default class BaseModal extends LightningElement {
      * @type {String}
      */
      @api title;
+
+    /**
+     * The title of the submit button.
+     * @type {String}
+     */
+     @api submitTitle;
+
      /**
      * Callback function fired by the submit button
      * @type {function}
@@ -21,4 +29,8 @@ export default class BaseModal extends LightningElement {
         await this.submitCallback();
         this.dispatchEvent(new Submit());
     }
+
+	get labels() {
+		return LABELS;
+	}
 }

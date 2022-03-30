@@ -14,4 +14,18 @@
 		<shortDescription>NewTradeChatterPostLinkTitle</shortDescription>
 		<value>Link to the trade</value>
 	</labels>
+	<labels>
+		<fullName>Cancel</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>Cancel</shortDescription>
+		<value>Cancel</value>
+	</labels>
+	<labels>
+		<fullName>Close</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>Close</shortDescription>
+		<value>Close</value>
+	</labels>
 </CustomLabels>

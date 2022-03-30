@@ -14,7 +14,7 @@
 						icon-name="utility:close"
 						class="slds-modal__close"
 						size="large"
-						alternative-text="Close"
+						alternative-text={labels.close}
 						onclick={handleCloseClick}
 					>
 					</lightning-button-icon>
@@ -27,8 +27,8 @@
                     <div class="slds-col">
                         <lightning-button
                             data-id="modal-button-cancel"
-                            label="Cancel"
-                            title="Cancel"
+                            label={labels.cancel}
+                            title={labels.cancel}
                             onclick={handleCloseClick}
                         ></lightning-button>
                     </div>
@@ -36,8 +36,8 @@
                         <lightning-button
                             variant="brand"
                             data-id="modal-button-save"
-                            label="Create"
-                            title="Create"
+                            label={submitTitle}
+                            title={submitTitle}
                             onclick={handleSubmit}
                         ></lightning-button>
                     </div>
