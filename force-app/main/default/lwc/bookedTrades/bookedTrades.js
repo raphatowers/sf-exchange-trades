@@ -9,7 +9,15 @@ const columns = [
     { label: LABELS.buyCurrency, fieldName: 'buyCurrency' },
     { label: LABELS.buyAmount, fieldName: 'buyAmount', type: 'number' },
     { label: LABELS.rate, fieldName: 'rate', type: 'number' },
-    { label: LABELS.dateBooked, fieldName: 'dateBooked', type: 'date' },
+    { label: LABELS.dateBooked, fieldName: 'dateBooked', type: 'date',
+        typeAttributes: {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+        }
+    },
 ];
 
 export default class BookedTrades extends LightningElement {
