@@ -4,6 +4,7 @@ import getExchangeRates from '@salesforce/apex/ExchangeTradeController.getExchan
 import createNewTrade from '@salesforce/apex/ExchangeTradeController.createNewTrade';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { LABELS } from './labels';
+import { stringFormat } from './utils';
 
 export default class NewTradeModal extends LightningElement {
     supportedCurrencies = [
@@ -25,6 +26,13 @@ export default class NewTradeModal extends LightningElement {
     handleSubmit() {
 		this.dispatchEvent(new Submit());
         this.handleClose();
+        this.dispatchEvent(
+            new ShowToastEvent({
+                message: LABELS.newTradeSuccessfullyCreated,
+                variant: 'success',
+                mode: 'sticky',
+            })
+        );
     }
 
     handleSellCurrencyChange(event) {
@@ -47,7 +55,7 @@ export default class NewTradeModal extends LightningElement {
 
             this.dispatchEvent(
 				new ShowToastEvent({
-					message: error.body.message,
+					message: stringFormat(LABELS.newTradeErrorRetrievingData, error.body.message),
 					variant: 'error',
                     mode: 'sticky',
 				})

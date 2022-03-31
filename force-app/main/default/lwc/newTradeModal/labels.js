@@ -6,6 +6,8 @@ import sellAmount from '@salesforce/label/c.SellAmount';
 import buyAmount from '@salesforce/label/c.BuyAmount';
 import rate from '@salesforce/label/c.Rate';
 import selectCurrency from '@salesforce/label/c.SelectCurrency';
+import newTradeErrorRetrievingData from '@salesforce/label/c.NewTradeErrorRetrievingData';
+import newTradeSuccessfullyCreated from '@salesforce/label/c.NewTradeSuccessfullyCreated';
 
 export const LABELS = {
 	newTrade,
@@ -16,4 +18,6 @@ export const LABELS = {
 	buyAmount,
 	rate,
 	selectCurrency,
+	newTradeErrorRetrievingData,
+	newTradeSuccessfullyCreated,
 }

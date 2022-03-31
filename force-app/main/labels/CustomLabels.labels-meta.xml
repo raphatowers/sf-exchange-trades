@@ -8,6 +8,20 @@
 		<value>A new trade has been created: \nSell Currency: {0}\nSell Amount: {1}\nBuy Currency: {2}\nBuy Amount: {3}\nRate: {4}\nBooked Date: {5}</value>
 	</labels>
 	<labels>
+		<fullName>NewTradeSuccessfullyCreated</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>NewTradeSuccessfullyCreated</shortDescription>
+		<value>The new trade has been successfully created.</value>
+	</labels>
+	<labels>
+		<fullName>NewTradeErrorRetrievingData</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>NewTradeErrorRetrievingData</shortDescription>
+		<value>Something went wrong while retrieving currency rates information: {0}</value>
+	</labels>
+	<labels>
 		<fullName>NewTradeChatterPostLinkTitle</fullName>
 		<language>en_US</language>
 		<protected>true</protected>
