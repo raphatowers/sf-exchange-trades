@@ -14,5 +14,4 @@
     <navType>Standard</navType>
     <tabs>Booked_Trades</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Exchange_Trades_UtilityBar</utilityBar>
 </CustomApplication>
