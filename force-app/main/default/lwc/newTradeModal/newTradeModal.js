@@ -18,6 +18,7 @@ export default class NewTradeModal extends LightningElement {
     rate = '-';
     sellAmount;
     buyAmount;
+	isLoading = false;
 
 	handleClose() {
 		this.dispatchEvent(new Close());
@@ -41,11 +42,13 @@ export default class NewTradeModal extends LightningElement {
     }
 
     handleRates() {
+	    this.isLoading = true;
         getExchangeRates({
             currencyCode: this.sellCurrency
         })
         .then((result) => {
             this.buyCurrencies = result;
+            this.isLoading = false;
         })
         .catch((error) => {
             this.rate = '-';
@@ -60,6 +63,7 @@ export default class NewTradeModal extends LightningElement {
                     mode: 'sticky',
 				})
 			);
+            this.isLoading = false;
         });
     }
 

@@ -6,7 +6,7 @@
         submit-callback={handleCreate}
         onsubmit={handleSubmit}
     >
-        <div class="slds-grid slds-wrap slds-gutters">
+        <div class="slds-grid slds-wrap slds-gutters slds-is-relative">
             <div class="slds-col slds-size_1-of-3">
                 <lightning-combobox
                     name="sellCurrency"
@@ -47,6 +47,7 @@
             <div class="slds-col slds-size_1-of-3 slds-col_bump-left">
                 <lightning-input type="number" label={labels.buyAmount} step=".01" value={buyAmount} disabled></lightning-input>
             </div>
+            <lightning-spinner if:true={isLoading} variant="brand" size="small"> </lightning-spinner>
         </div>
     </c-base-modal>
 </template>
