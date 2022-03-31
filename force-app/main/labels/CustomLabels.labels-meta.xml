@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+	<labels>
+		<fullName>NewTradeChatterPostBody</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>NewTradeChatterPostBody</shortDescription>
+		<value>A new trade has been created: \nSell Currency: {0}\nSell Amount: {1}\nBuy Currency: {2}\nBuy Amount: {3}\nRate: {4}\nBooked Date: {5}</value>
+	</labels>
+	<labels>
+		<fullName>NewTradeSuccessfullyCreated</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>NewTradeSuccessfullyCreated</shortDescription>
+		<value>The new trade has been successfully created.</value>
+	</labels>
+	<labels>
+		<fullName>NewTradeErrorRetrievingData</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>NewTradeErrorRetrievingData</shortDescription>
+		<value>Something went wrong while retrieving currency rates information: {0}</value>
+	</labels>
+	<labels>
+		<fullName>NewTradeChatterPostLinkTitle</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>NewTradeChatterPostLinkTitle</shortDescription>
+		<value>Link to the trade</value>
+	</labels>
+	<labels>
+		<fullName>Cancel</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>Cancel</shortDescription>
+		<value>Cancel</value>
+	</labels>
+	<labels>
+		<fullName>Close</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>Close</shortDescription>
+		<value>Close</value>
+	</labels>
+	<labels>
+		<fullName>Create</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>Create</shortDescription>
+		<value>Create</value>
+	</labels>
+	<labels>
+		<fullName>NewTrade</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>NewTrade</shortDescription>
+		<value>New Trade</value>
+	</labels>
+	<labels>
+		<fullName>SellCurrency</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>SellCurrency</shortDescription>
+		<value>Sell Currency</value>
+	</labels>
+	<labels>
+		<fullName>BuyCurrency</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>BuyCurrency</shortDescription>
+		<value>Buy Currency</value>
+	</labels>
+	<labels>
+		<fullName>SellAmount</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>SellAmount</shortDescription>
+		<value>Sell Amount</value>
+	</labels>
+	<labels>
+		<fullName>BuyAmount</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>BuyAmount</shortDescription>
+		<value>Buy Amount</value>
+	</labels>
+	<labels>
+		<fullName>Rate</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>Rate</shortDescription>
+		<value>Rate</value>
+	</labels>
+	<labels>
+		<fullName>SelectCurrency</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>SelectCurrency</shortDescription>
+		<value>Select Currency</value>
+	</labels>
+	<labels>
+		<fullName>BookedTrades</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>BookedTrades</shortDescription>
+		<value>Booked Trades</value>
+	</labels>
+	<labels>
+		<fullName>DateBooked</fullName>
+		<language>en_US</language>
+		<protected>true</protected>
+		<shortDescription>DateBooked</shortDescription>
+		<value>Date Booked</value>
+	</labels>
+</CustomLabels>

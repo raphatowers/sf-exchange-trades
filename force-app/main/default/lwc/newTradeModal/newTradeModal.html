@@ -1,0 +1,53 @@
+<template>
+    <c-base-modal
+        title={labels.newTrade}
+        submit-title={labels.create}
+        onclose={handleClose}
+        submit-callback={handleCreate}
+        onsubmit={handleSubmit}
+    >
+        <div class="slds-grid slds-wrap slds-gutters slds-is-relative">
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-combobox
+                    name="sellCurrency"
+                    label={labels.sellCurrency}
+                    value={sellCurrency}
+                    placeholder={labels.selectCurrency}
+                    options={supportedCurrencies}
+                    onchange={handleSellCurrencyChange}
+                    required
+                ></lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-3 slds-align_absolute-center">
+                <div class="slds-form-element">
+                    <span class="slds-form-element__label">{labels.rate}</span>
+                    <div class="slds-form-element__control">
+                        <lightning-icon icon-name="utility:right" alternative-text="Right">
+                        </lightning-icon>
+                        <span>{rate}</span>
+                        <lightning-icon icon-name="utility:right" alternative-text="Right">
+                        </lightning-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-combobox
+                    name="buyCurrency"
+                    label={labels.buyCurrency}
+                    value={buyCurrency}
+                    placeholder={labels.selectCurrency}
+                    options={buyCurrencies}
+                    onchange={handleBuyCurrencyChange}
+                    required
+                ></lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="number" label={labels.sellAmount} step=".01" value={sellAmount} onkeyup={handleSellAmountChange} required></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3 slds-col_bump-left">
+                <lightning-input type="number" label={labels.buyAmount} step=".01" value={buyAmount} disabled></lightning-input>
+            </div>
+            <lightning-spinner if:true={isLoading} variant="brand" size="small"> </lightning-spinner>
+        </div>
+    </c-base-modal>
+</template>

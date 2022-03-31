@@ -1,0 +1,47 @@
+import { LightningElement, wire } from 'lwc';
+import { refreshApex } from '@salesforce/apex';
+import getBookedTrades from '@salesforce/apex/ExchangeTradeController.getBookedTrades';
+import { LABELS } from './labels';
+
+const columns = [
+    { label: LABELS.sellCurrency, fieldName: 'sellCurrency' },
+    { label: LABELS.sellAmount, fieldName: 'sellAmount', type: 'number' },
+    { label: LABELS.buyCurrency, fieldName: 'buyCurrency' },
+    { label: LABELS.buyAmount, fieldName: 'buyAmount', type: 'number' },
+    { label: LABELS.rate, fieldName: 'rate', type: 'number' },
+    { label: LABELS.dateBooked, fieldName: 'dateBooked', type: 'date',
+        typeAttributes: {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+        }
+    },
+];
+
+export default class BookedTrades extends LightningElement {
+    data = [];
+    columns = columns;
+    isModalOpen = false;
+
+    @wire(getBookedTrades)
+    wiredTrades;
+
+    refreshTrades() {
+        this.closeModal();
+        refreshApex(this.wiredTrades);
+    }
+
+    openModal() {
+        this.isModalOpen = true;
+    }
+
+    closeModal() {
+        this.isModalOpen = false;
+    }
+
+	get labels() {
+		return LABELS;
+	}
+}
